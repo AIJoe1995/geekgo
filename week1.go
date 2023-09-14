@@ -16,13 +16,13 @@ func ShrinkSlice[T any](slice []T) []T {
 	} else {
 		fmt.Printf("shrink capacity")
 		res := make([]T, 0, newcap)
-		res = append(res, slice[:len(slice)]...)
+		res = append(res, slice...)
 		return res
 	}
 
 }
 
-func delete[T any](slice []T, idx int) ([]T, error) {
+func deleteAt[T any](slice []T, idx int) ([]T, error) {
 
 	if idx < 0 || idx >= len(slice) {
 		return nil, errors.New("index error")
@@ -57,19 +57,19 @@ func main() {
 	// err := nil cannot assign nil without explicit type
 	myprint[int](res, nil)
 
-	res, err := delete(res, 0)
+	res, err := deleteAt(res, 0)
 	myprint[int](res, err)
 
-	res, err = delete(res, 0)
+	res, err = deleteAt(res, 0)
 	myprint[int](res, err)
 
-	res, err = delete(res, 0)
+	res, err = deleteAt(res, 0)
 	myprint[int](res, err)
 
-	res, err = delete(res, 0)
+	res, err = deleteAt(res, 0)
 	myprint[int](res, err)
 
-	res, err = delete(res, 0)
+	res, err = deleteAt(res, 0)
 	myprint[int](res, err)
 
 }
