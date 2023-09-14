@@ -8,7 +8,7 @@ import (
 func ShrinkSlice[T any](slice []T) []T {
 	prevcap := cap(slice)
 	newcap := cap(slice)
-	if len(slice) < cap(slice)/2 { // len始终是一开始的len delete没有改变len
+	if len(slice) < cap(slice)/2 {
 		newcap = cap(slice) / 2
 	}
 	if prevcap == newcap {
@@ -30,7 +30,7 @@ func deleteAt[T any](slice []T, idx int) ([]T, error) {
 	head_slice := slice[:idx]
 	tail_slice := slice[idx+1:]
 	res := make([]T, 0, cap(slice))
-	res = append(res, head_slice...) // append的时候会把headslice的len也赋值过去吗
+	res = append(res, head_slice...)
 	res = append(res, tail_slice...)
 
 	res = ShrinkSlice(res)
