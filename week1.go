@@ -23,16 +23,17 @@ func ShrinkSlice[T any](slice []T) []T {
 }
 
 func delete[T any](slice []T, idx int) ([]T, error) {
-	if idx >= len(slice) {
+
+	if idx < 0 || idx >= len(slice) {
 		return nil, errors.New("index error")
 	}
 	head_slice := slice[:idx]
 	tail_slice := slice[idx+1:]
 	res := make([]T, 0, cap(slice))
-	res = append(res, head_slice...)
+	res = append(res, head_slice...) // append的时候会把headslice的len也赋值过去吗
 	res = append(res, tail_slice...)
-	//res.len -= 1 //len是私有变量
-	//res = ShrinkSlice(slice)
+
+	res = ShrinkSlice(res)
 	return res, nil
 
 }
