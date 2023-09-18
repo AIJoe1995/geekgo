@@ -27,14 +27,21 @@ func deleteAt[T any](slice []T, idx int) ([]T, error) {
 	if idx < 0 || idx >= len(slice) {
 		return nil, errors.New("index error")
 	}
-	head_slice := slice[:idx]
-	tail_slice := slice[idx+1:]
-	res := make([]T, 0, cap(slice))
-	res = append(res, head_slice...)
-	res = append(res, tail_slice...)
 
-	res = ShrinkSlice(res)
-	return res, nil
+	for i := idx; i < len(slice)-1; i++ {
+		slice[i] = slice[i+1]
+	}
+	slice = slice[:len(slice)-1]
+	slice = ShrinkSlice(slice)
+
+	return slice, nil
+	//head_slice := slice[:idx]
+	//tail_slice := slice[idx+1:]
+	//res := make([]T, 0, cap(slice))
+	//res = append(res, head_slice...)
+	//res = append(res, tail_slice...)
+	//
+	//return res, nil
 
 }
 
