@@ -1,0 +1,10 @@
+mockgen -source=C:\Users\Oasis\go\src\geekgo\week5\webook\service\user.go -destination=C:\Users\Oasis\go\src\geekgo\week5\webook\service\mocks\user.mock.go -package=svcmocks
+mockgen -source=C:\Users\Oasis\go\src\geekgo\week5\webook\service\code.go -destination=C:\Users\Oasis\go\src\geekgo\week5\webook\service\mocks\code.mock.go -package=svcmocks
+mockgen -source=C:\Users\Oasis\go\src\geekgo\week5\webook\repository\code.go -destination=C:\Users\Oasis\go\src\geekgo\week5\webook\repository\mocks\code.mock.go -package=repomocks
+mockgen -source=C:\Users\Oasis\go\src\geekgo\week5\webook\repository\user.go -destination=C:\Users\Oasis\go\src\geekgo\week5\webook\repository\mocks\user.mock.go -package=repomocks
+
+mockgen -source=C:\Users\Oasis\go\src\geekgo\week5\webook\repository\dao\user.go -package=daomocks -destination=C:\Users\Oasis\go\src\geekgo\week5\webook\repository\dao\mocks\user.mock.go
+
+mockgen -source=C:\Users\Oasis\go\src\geekgo\week5\webook\web\jwt\types.go -package=jwtmocks -destination=C:\Users\Oasis\go\src\geekgo\week5\webook\web\jwt\mocks\handler.mock.go
+
+mockgen -package=redismocks -destination=C:\Users\Oasis\go\src\geekgo\week5\webook\repository\cache\redismocks\cmdable.mock.go github.com/redis/go-redis/v9 Cmdable

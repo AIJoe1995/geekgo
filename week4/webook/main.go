@@ -28,7 +28,7 @@ func initWebServer() *gin.Engine {
 }
 
 func initDB() *gorm.DB {
-	db, err := gorm.Open(mysql.Open("root:1234@tcp(localhost:3306)/webook?charset=utf8&parseTime=true"), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open("root:1234@tcp(localhost:13316)/webook?charset=utf8&parseTime=true"), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
