@@ -29,6 +29,12 @@ type GORMAsyncSmsDAO struct {
 	db *gorm.DB
 }
 
+func NewGORMAsyncSmsDAO(db *gorm.DB) SMSDAO {
+	return &GORMAsyncSmsDAO{
+		db: db,
+	}
+}
+
 func (g *GORMAsyncSmsDAO) Insert(ctx context.Context, sms SMS) error {
 	return g.db.Create(&sms).Error
 }

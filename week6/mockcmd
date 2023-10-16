@@ -1,0 +1,2 @@
+mockgen -source=C:\Users\Oasis\go\src\geekgo\week6\webook\service\sms\types.go -destination=C:\Users\Oasis\go\src\geekgo\week6\webook\service\sms\mocks\types.mock.go -package=smsmocks
+mockgen -source=C:\Users\Oasis\go\src\geekgo\week6\webook\repository\sms.go -destination=C:\Users\Oasis\go\src\geekgo\week6\webook\repository\mocks\sms.mock.go -package=smsrepomocks

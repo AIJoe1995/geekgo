@@ -20,6 +20,12 @@ type smsRepository struct {
 	dao dao.SMSDAO
 }
 
+func NewSMSRepository(dao dao.SMSDAO) SMSRepository {
+	return &smsRepository{
+		dao: dao,
+	}
+}
+
 func (s *smsRepository) PreemptWaitingSMS(ctx context.Context) (domain.SMS, error) {
 	// 从数据库找到待发送的短信
 	dao_sms, err := s.dao.GetWaitingSMS(ctx)
