@@ -1,0 +1,45 @@
+localhost:8080/users/signup
+{
+"email": "abc1234@qq.com",
+"password": "hello_world#123",
+"confirmPassword": "hello_world#123"
+}
+{
+"email": "1234@qq.com",
+"password": "hello_world#123",
+"confirmPassword": "hello_world#123"
+}
+{
+"email": "abc1234@qq.com",
+"password": "helloworld",
+"confirmPassword": "helloworld"
+}
+{
+"email": "abc12345@qq.com",
+"password": "helloworld",
+"confirmPassword": "helloworld"
+}
+
+
+
+
+
+localhost:8080/users/login
+{
+"email": "abc1234@qq.com",
+"password": "hello_world#123"
+}
+
+
+localhost:8080/articles/edit
+{
+"title": "title1",
+"content": "content1"
+}
+
+
+localhost:8080/articles/like
+{
+"id": 1,
+"like": true,
+}
