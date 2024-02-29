@@ -13,4 +13,6 @@ CronJobService 服务提供 添加任务 抢占任务 设置下次运行时间�
 
 任务的调度: 拿到domain.Job{Cfg, Expression, Executor}之后，需要从注册到schedular里面的Executor map里面找到任务对应的执行器 
 抢占 -> 执行 -> 释放(job.CancelFunc) 
+![img_2.png](img_2.png)
+![img.png](img.png)
 
