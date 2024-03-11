@@ -1,0 +1,49 @@
+services:
+  mysql8:
+    image: mysql:8.0
+    restart: always
+    command:
+      #      - 加入参数，设置 binlog 和主节点
+      - --default_authentication_plugin=mysql_native_password
+      - --binlog-format=ROW
+      - --server-id=1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      #      设置初始化脚本
+      - ./script/mysql/:/docker-entrypoint-initdb.d/
+    ports:
+      #      注意这里我映射为了 13316 端口
+      - "13316:3306"
+  kafka:
+    image: 'bitnami/kafka:3.6.0'
+    ports:
+      - '9092:9092'
+      - '9094:9094'
+    environment:
+      - KAFKA_CFG_NODE_ID=0
+      #      - 三个分区
+      - KAFKA_CREATE_TOPICS=webook_binlog:3:1
+      #      - 允许自动创建 topic，线上不要开启
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://:9093,EXTERNAL://0.0.0.0:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+  canal:
+    image: canal/canal-server
+    environment:
+      - CANAL_IP=canal-server
+      - CANAL_PORT=11111
+      - CANAL_DESTINATIONS=example
+    depends_on:
+      - mysql8
+      - kafka
+    ports:
+      #      - 暴露了 canal 的端口，但是其实一般比较少直接跟 canal 打交道
+      - 11111:11111
+    volumes:
+      - ./script/canal/webook/instance.properties:/home/admin/canal-server/conf/webook/instance.properties
+      - ./script/canal/canal.properties:/home/admin/canal-server/conf/canal.properties
