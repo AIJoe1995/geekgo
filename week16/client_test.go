@@ -38,7 +38,7 @@ func (s *EtcdClientTestSuite) TestCustomRoundRobinClient() {
     ]
 }
 `
-	cc, err := grpc.Dial("etcs:///service/user", grpc.WithResolvers(bd),
+	cc, err := grpc.Dial("etcd:///service/user", grpc.WithResolvers(bd),
 		grpc.WithDefaultServiceConfig(svcCfg),
 		grpc.WithTransportCredentials(insecure.NewCredentials()))
 	client := userGRPC.NewUserServiceClient(cc)

@@ -37,6 +37,7 @@ func (s *EtcdTestSuite) TestServer() {
 	go func() {
 		s.startServer(":8091", 10)
 	}()
+	select {}
 }
 
 func GetOutBoundIP() string {
